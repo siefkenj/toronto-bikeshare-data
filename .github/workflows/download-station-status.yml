@@ -7,6 +7,7 @@ permissions:
 on:
     schedule:
         - cron: "*/5 * * * *"
+    workflow_dispatch: true
 jobs:
     download-station-status:
         runs-on: ubuntu-latest
