@@ -8,15 +8,15 @@ on:
     schedule:
         - cron: "*/5 * * * *"
 jobs:
-    download:
+    download-station-status:
         runs-on: ubuntu-latest
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
 
             - name: Set up Python
-              uses: actions/setup-python@v2
+              uses: actions/setup-python@v5
               with:
                   python-version: "3.11" # Specify the exact Python version if required
 
@@ -29,19 +29,9 @@ jobs:
               run: python download-station-status.py
               continue-on-error: false
 
-            - name: Check for changes
-              id: changes
+            - name: Commit and push if it changed
               run: |
                   git add station_status/*
-                  if git diff --quiet; then
-                    echo "::set-output name=changed::false"
-                  else
-                    echo "::set-output name=changed::true"
-                  fi
-
-            - name: Commit and push if it changed
-              if: steps.changes.outputs.changed == 'true'
-              run: |
                   git config --local user.email "action@github.com"
                   git config --local user.name "GitHub Action"
                   git commit -m "Update station data"
