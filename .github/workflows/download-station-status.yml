@@ -1,4 +1,4 @@
-name: Run download-station-data.py and commit new files
+name: Run download-station-status.py and commit new files
 
 permissions:
     contents: write
@@ -25,8 +25,8 @@ jobs:
                   python -m pip install --upgrade pip
                   if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-            - name: Run download-station-data.py
-              run: python download-station-data.py
+            - name: Run download-station-status.py
+              run: python download-station-status.py
               continue-on-error: false
 
             - name: Check for changes
