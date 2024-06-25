@@ -1,15 +1,14 @@
 name: Run download-station-data.py and commit new files
 
-on:
-    schedule:
-        - cron: "*/1 * * * *" # Run every 1 minutes
-
 permissions:
     contents: write
     pull-requests: read
 
+on:
+    schedule:
+        - cron: "*/1 * * * *" # Run every 1 minutes
 jobs:
-    build:
+    download:
         runs-on: ubuntu-latest
 
         steps:
